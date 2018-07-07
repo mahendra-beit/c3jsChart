@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<style>
+    body {
+        overflow-y: scroll;
+    }
+</style>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+
+    <div class="container">
+        <h2>Large Modal</h2>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-ng-click="viewGraph()">Open Large Modal</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+
+                            First Name: <input type="text" ng-model="firstName"><br> Last Name: <input type="text" ng-model="lastName"><br>
+                            <br> Full Name: {{firstName + " " + lastName}}
+
+                        </div>
+                        <div class="row">
+                            <div id="viewCarlineChart"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $http) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+            $scope.carlineCurveData = [];
+            $scope.viewGraph = function() {
+
+
+                app.value('treeViewDefaults', {
+                    foldersProperty: 'folders',
+                    filesProperty: 'files',
+                    displayProperty: 'name',
+                    collapsible: true
+                });
+                $http.get("myjson.json").then(function(response) {
+                    //$scope.myWelcome = response.data;
+                    $scope.carlineCurveData = response.data;
+                    console.log($scope.carlineCurveData)
+                    console.log($scope.carlineArr)
+                });
+
+
+
+                var chart = c3.generate({
+                    bindto: '#viewCarlineChart',
+                    size: {
+                        width: 900
+                    },
+                    legend: {
+                        show: true
+                    },
+
+                    data: {
+                        x: 'x',
+                        culling: false,
+
+                        //        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
+                        columns: [
+                            ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+                            //            ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
+                            ['data1', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data2', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data3', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data4', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data5', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data6', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data6', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data8', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data9', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data10', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data11', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data12', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data13', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data14', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data15', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data16', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data17', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data18', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data19', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data20', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data21', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data22', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data23', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2],
+                            ['data24', 1, 2, 0.3, 0.5, 0.8, 0.10, 0.5, 11.2]
+                        ]
+                    },
+                    axis: {
+                        x: {
+                            type: 'timeseries',
+                            tick: {
+                                format: '%Y-%m-%d'
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
